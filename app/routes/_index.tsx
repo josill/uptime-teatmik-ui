@@ -2,6 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import type { MetaFunction } from "@remix-run/node";
 import { useQuery } from "@tanstack/react-query";
 import search from "api/search";
+import useDebounce from "hooks/useDebouncedQuery";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -23,11 +24,14 @@ export default function Index() {
     mode: "onChange",
     resolver: zodResolver(schema),
   });
+
   const query = watch("query");
-  const { data, error, isLoading } = useQuery({
-    queryKey: ["searchResults", query],
-    queryFn: () => search({ query }),
-    enabled: !!query,
+  const debouncedQuery = useDebounce(query, 300);
+
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["searchResults", debouncedQuery],
+    queryFn: () => search({ query: debouncedQuery }),
+    enabled: !!debouncedQuery,
   });
 
   return (
