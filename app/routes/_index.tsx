@@ -1,6 +1,9 @@
+import { zodResolver } from "@hookform/resolvers/zod";
 import type { MetaFunction } from "@remix-run/node";
 import { useQuery } from "@tanstack/react-query";
 import search from "api/search";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 
 export const meta: MetaFunction = () => {
   return [
@@ -9,10 +12,22 @@ export const meta: MetaFunction = () => {
   ];
 };
 
+const schema = z.object({
+  query: z.string().min(3, { message: "Must be 3 or more characters long" }),
+});
+
+type SearchSchema = z.infer<typeof schema>;
+
 export default function Index() {
-  const { data } = useQuery({
-    queryKey: ["searchResults"],
-    queryFn: search,
+  const { register, watch } = useForm<SearchSchema>({
+    mode: "onChange",
+    resolver: zodResolver(schema),
+  });
+  const query = watch("query");
+  const { data, error, isLoading } = useQuery({
+    queryKey: ["searchResults", query],
+    queryFn: () => search({ query }),
+    enabled: !!query,
   });
 
   return (
@@ -33,6 +48,7 @@ export default function Index() {
           type="text"
           className="w-full max-w-2xl px-4 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           placeholder="Search..."
+          {...register("query")}
         />
         <button className="bg-blue-800 text-white px-6 py-2 rounded-r-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
           SEARCH
