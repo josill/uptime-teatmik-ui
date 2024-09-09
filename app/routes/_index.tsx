@@ -10,7 +10,7 @@ export const meta: MetaFunction = () => {
 export default function Index() {
   return (
     <div className="flex flex-col justify-center items-center max-w-4xl mx-auto p-4 w-screen h-screen">
-      <div className="text-center mb-4">
+      <div className="text-center mb-4 max-w-[500px]">
         <h1 className="text-5xl font-bold mb-2">
           <span className="text-red-500">up</span>
           <span className="text-black">time</span>
@@ -21,7 +21,7 @@ export default function Index() {
           warming up business climate in Estonia
         </p>
       </div>
-      <div className="flex justify-center w-full">
+      <div className="flex justify-center w-full max-w-[500px]">
         <input
           type="text"
           className="w-full max-w-2xl px-4 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
