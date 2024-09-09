@@ -51,11 +51,11 @@ export default function Index() {
       <div className="flex justify-center w-full max-w-[500px] relative">
         <input
           type="text"
-          className="w-3/4 max-w-2xl px-4 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="w-3/4 max-w-2xl px-4 py-2 border border-gray-300 focus:border-blue-500 rounded-l-md"
           placeholder="Search..."
           {...register("query")}
         />
-        <button className="w-1/4 bg-blue-800 text-white px-6 py-2 rounded-r-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+        <button className="w-1/4 bg-blue-800 text-white px-6 py-2 rounded-r-md hover:bg-blue-700 focus:border-blue-500 ">
           SEARCH
         </button>
 
