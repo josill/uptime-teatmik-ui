@@ -1,5 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { MetaFunction } from "@remix-run/node";
+import { Link } from "@remix-run/react";
 import { useQuery } from "@tanstack/react-query";
 import search from "api/search";
 import useDebounce from "hooks/useDebouncedQuery";
@@ -47,16 +48,34 @@ export default function Index() {
           warming up business climate in Estonia
         </p>
       </div>
-      <div className="flex justify-center w-full max-w-[500px]">
+      <div className="flex justify-center w-full max-w-[500px] relative">
         <input
           type="text"
-          className="w-full max-w-2xl px-4 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="w-3/4 max-w-2xl px-4 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           placeholder="Search..."
           {...register("query")}
         />
-        <button className="bg-blue-800 text-white px-6 py-2 rounded-r-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+        <button className="w-1/4 bg-blue-800 text-white px-6 py-2 rounded-r-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
           SEARCH
         </button>
+
+        {data && (
+          <div className="absolute w-3/4 h-fit border-x-[1px] border-b-[1px] border-blue-500 h-full top-11 left-0">
+            {data.map((result: any) => {
+              const entity = result.entity;
+              return (
+                <Link
+                  key={entity.id}
+                  className="block hover:bg-blue-500 hover:text-white p-1"
+                  to={entity.id}
+                >
+                  <div>{entity.firstName}</div>
+                  <div>{entity.businessOrLastName}</div>
+                </Link>
+              );
+            })}
+          </div>
+        )}
       </div>
     </div>
   );
