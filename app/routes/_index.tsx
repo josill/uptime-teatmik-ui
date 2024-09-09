@@ -1,4 +1,6 @@
 import type { MetaFunction } from "@remix-run/node";
+import { useQuery } from "@tanstack/react-query";
+import search from "api/search";
 
 export const meta: MetaFunction = () => {
   return [
@@ -8,6 +10,11 @@ export const meta: MetaFunction = () => {
 };
 
 export default function Index() {
+  const { data } = useQuery({
+    queryKey: ["searchResults"],
+    queryFn: search,
+  });
+
   return (
     <div className="flex flex-col justify-center items-center max-w-4xl mx-auto p-4 w-screen h-screen">
       <div className="text-center mb-4 max-w-[500px]">
