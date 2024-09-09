@@ -27,6 +27,16 @@ const EntityDetailView = () => {
     select: (data) => data.entity,
   });
 
+  const formatJSON = (jsonString: string): string => {
+    try {
+      const parsed = JSON.parse(jsonString);
+      return JSON.stringify(parsed, null, 2);
+    } catch (e) {
+      console.error("Error parsing JSON:", e);
+      return jsonString;
+    }
+  };
+
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-screen bg-gray-100">
@@ -52,10 +62,8 @@ const EntityDetailView = () => {
     );
   }
 
-  console.log(data);
-
   return (
-    <div className="w-screen h-screen flex flex-col justify-center items-center ">
+    <div className="w-screen h-screen flex flex-col justify-center items-center">
       <Link className="absolute top-8 left-8 text-blue-800" to={"/"}>
         <ArrowBigLeft width={32} height={32} />
       </Link>
@@ -142,6 +150,19 @@ const EntityDetailView = () => {
             </div>
           ))}
         </div>
+
+        {data.formattedJson && (
+          <div className="mt-8">
+            <h2 className="text-xl font-semibold mb-4 flex items-center text-blue-800">
+              <InfoIcon className="w-5 h-5 mr-2" />
+              Full JSON Data
+            </h2>
+
+            <pre className="bg-gray-100 p-4 rounded-lg shadow-inner overflow-auto max-h-[60vh] text-sm">
+              {formatJSON(data.formattedJson)}
+            </pre>
+          </div>
+        )}
       </div>
     </div>
   );
