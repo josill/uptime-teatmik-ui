@@ -9,40 +9,28 @@ export const meta: MetaFunction = () => {
 
 export default function Index() {
   return (
-    <div className="font-sans p-4">
-      <h1 className="text-3xl">Welcome to Remix</h1>
-      <ul className="list-disc mt-4 pl-6 space-y-2">
-        <li>
-          <a
-            className="text-blue-700 underline visited:text-purple-900"
-            target="_blank"
-            href="https://remix.run/start/quickstart"
-            rel="noreferrer"
-          >
-            5m Quick Start
-          </a>
-        </li>
-        <li>
-          <a
-            className="text-blue-700 underline visited:text-purple-900"
-            target="_blank"
-            href="https://remix.run/start/tutorial"
-            rel="noreferrer"
-          >
-            30m Tutorial
-          </a>
-        </li>
-        <li>
-          <a
-            className="text-blue-700 underline visited:text-purple-900"
-            target="_blank"
-            href="https://remix.run/docs"
-            rel="noreferrer"
-          >
-            Remix Docs
-          </a>
-        </li>
-      </ul>
+    <div className="flex flex-col justify-center items-center max-w-4xl mx-auto p-4 w-screen h-screen">
+      <div className="text-center mb-4">
+        <h1 className="text-5xl font-bold mb-2">
+          <span className="text-red-500">up</span>
+          <span className="text-black">time</span>
+          <span className="text-lime-500">teatmik</span>
+          <span className="text-amber-600">.ee</span>
+        </h1>
+        <p className="text-gray-600 text-sm">
+          warming up business climate in Estonia
+        </p>
+      </div>
+      <div className="flex justify-center w-full">
+        <input
+          type="text"
+          className="w-full max-w-2xl px-4 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          placeholder="Search..."
+        />
+        <button className="bg-blue-800 text-white px-6 py-2 rounded-r-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+          SEARCH
+        </button>
+      </div>
     </div>
   );
 }
